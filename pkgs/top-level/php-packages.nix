@@ -165,6 +165,23 @@ let
     sha256 = "0d4p1gpl8gkzdiv860qzxfz250ryf0wmjgyc8qcaaqgkdyh5jy5p";
   };
 
+  tideways_xhprof = buildPecl rec {
+    version = "afc61bd";
+    name = "tideways_xhprof-${version}";
+
+    buildInputs = [ pkgs.pcre2 ];
+
+    src = pkgs.fetchFromGitHub {
+      owner = "tideways";
+      repo = "php-xhprof-extension";
+      rev = "afc61bd1e3336ef207247c5e92ae6b5dab0a6e1";
+      sha256 = "07wq4xm0vcmyiwib7a8v7389gxadym39vyrms7dbzzh01x46ap2r";
+    };
+
+    doCheck = true;
+    checkTarget = "test";
+  };
+
   xdebug =  if isPhp73 then xdebug73 else xdebug7;
 
   xdebug7 = assert !isPhp73; buildPecl {
